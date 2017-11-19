@@ -1,0 +1,13 @@
+startup --host_jvm_args=-Dbazel.DigestFunction=sha256
+
+# github.com/buchgr/bazel-remote running on port 80
+build:cache --remote_rest_cache=http://inf-baz01.office.yext.com/
+
+# Restrict PATH to get cache hits across users / machines
+build:cache --experimental_strict_action_env
+
+# Support sandboxing and local works when building locally
+build:cache --experimental_remote_spawn_cache
+
+# Print errors interacting with the cache
+build:cache --verbose_failures
